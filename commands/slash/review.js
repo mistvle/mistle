@@ -76,6 +76,8 @@ module.exports = {
       ]
     }
   ]
-})
+});
+
+    await interaction.reply({content: "<:check:1503593424299753555> Successfully sent review in <#1503425388955566310>."})
     }
 }
