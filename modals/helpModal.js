@@ -8,7 +8,7 @@ module.exports = {
 
   async execute(interaction) {
     const CATEGORY_ID = "1503425665901264998";
-    const STAFF_ROLE_IDS = ["1503107376105001060", "1503255439947595948"];
+    const STAFF_ROLE_IDS = ["1503107376105001060", "1503466003869335654"];
 
     const reason = interaction.fields.getTextInputValue("help_reason");
 
