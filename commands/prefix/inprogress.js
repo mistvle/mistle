@@ -8,6 +8,7 @@ module.exports = {
 
         }
         await message.delete();
+        const topic = message.channel.topic;
         await message.channel.send({
   "flags": 32768,
   "components": [
@@ -16,7 +17,7 @@ module.exports = {
       "components": [
         {
           "type": 10,
-          "content": "# <:m_Heart:1504308082287575151> Order In-Progress"
+          "content": `# <:m_Heart:1504308082287575151> Order In-Progress\n-# <@${topic}>`
         },
         {
           "type": 14,
