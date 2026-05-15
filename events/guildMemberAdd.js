@@ -1,7 +1,7 @@
 module.exports = {
   name: "guildMemberAdd",
 
-  async execute(member, client) {
+  async execute(client, member) {
 
     const channel = member.guild.channels.cache.get("1503425522649141398");
 
