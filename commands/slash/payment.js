@@ -36,10 +36,12 @@ module.exports = {
 
 await noblox.configureGamePass(
     parseInt(GAMEPASS_ID),
-    info.Name,
-    info.Description,
-    true,
-    amount
+    {
+        name: info.Name,
+        description: info.Description,
+        price: amount,
+        isForSale: true
+    }
 );
         } catch (err) {
             console.error(err);
