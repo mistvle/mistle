@@ -32,8 +32,7 @@ module.exports = {
             await noblox.setCookie(process.env.ROBLOX_COOKIE);
 
             // 🔥 CHANGE GAMEPASS PRICE
-            const info = await noblox.getProductInfo(parseInt(GAMEPASS_ID));
-
+const info = await noblox.getGamePassInfo(parseInt(GAMEPASS_ID));
 await noblox.configureGamePass(
     parseInt(GAMEPASS_ID),
     {
