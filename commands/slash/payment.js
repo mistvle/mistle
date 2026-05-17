@@ -2,7 +2,7 @@ const { SlashCommandBuilder, EmbedBuilder, ActionRowBuilder, ButtonBuilder, Butt
 const noblox = require("noblox.js");
 
 // 🔹 YOUR GAMEPASS ID (NOT product id)
-const GAMEPASS_ID = "1840538575";
+const GAMEPASS_ID = "1841596538";
 
 module.exports = {
     data: new SlashCommandBuilder()
