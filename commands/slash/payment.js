@@ -33,9 +33,9 @@ module.exports = {
 
             // 🔥 CHANGE GAMEPASS PRICE
             await noblox.configureGamePass(
-                parseInt(GAMEPASS_ID),
-                "", // keep name
-                "", // keep description
+                Number(GAMEPASS_ID),
+                null,
+                null,
                 amount
             );
 
@@ -75,7 +75,7 @@ module.exports = {
               "type": 2,
               "style": 5,
               "label": "Purchase",
-              "url": `https://www.roblox.com/game-pass/${GAMEPASS_ID}`,
+              "url": `https://www.roblox.com/game-pass/${GAMEPASS_ID}`
             }
           ]
         },
