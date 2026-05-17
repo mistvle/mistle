@@ -1,8 +1,56 @@
-module.exports = {
-    name: "payment",
+const { SlashCommandBuilder, EmbedBuilder, ActionRowBuilder, ButtonBuilder, ButtonStyle } = require("discord.js");
+const noblox = require("noblox.js");
 
-    async execute (message) {
-        await message.reply({
+// 🔹 YOUR GAMEPASS ID (NOT product id)
+const GAMEPASS_ID = "1796332208";
+
+module.exports = {
+    data: new SlashCommandBuilder()
+        .setName("payment")
+        .setDescription("Send a gamepass with the payment amount.")
+        .addIntegerOption(option =>
+            option
+                .setName("amount")
+                .setDescription("Input the amount of the gamepass.")
+                .setRequired(true)
+        ),
+
+    async execute(interaction) {
+        const isAdmin = interaction.member.permissions.has("Administrator");
+
+        if (!isAdmin) {
+            return interaction.reply({
+                content: "You do not have permission to run this command.",
+                flags: 64
+            });
+        }
+
+        const amount = interaction.options.getInteger("amount");
+
+        try {
+            // 🔥 LOGIN TO ROBLOX
+            await noblox.setCookie(process.env.ROBLOX_COOKIE);
+
+            // 🔥 CHANGE GAMEPASS PRICE
+            await noblox.configureGamePass(
+                parseInt(GAMEPASS_ID),
+                "", // keep name
+                "", // keep description
+                amount
+            );
+
+        } catch (err) {
+            console.error(err);
+
+            return interaction.reply({
+                content: "Failed to update gamepass price.",
+                flags: 64
+            });
+        }
+
+        // 🔹 SEND EMBED + BUTTON
+
+        await interaction.reply({
   "flags": 32768,
   "components": [
     {
@@ -10,7 +58,7 @@ module.exports = {
       "components": [
         {
           "type": 10,
-          "content": "# <:m_Heart:1504308082287575151> Payment"
+          "content": "# Payment Update"
         },
         {
           "type": 14,
@@ -18,11 +66,7 @@ module.exports = {
         },
         {
           "type": 10,
-          "content": "To pay Mistle for your order, you must pay **100%** upfront via **BuymeaCoffee**. You can access our site [here](https://buymeacoffee.com/mistvle)."
-        },
-        {
-          "type": 14,
-          "divider": false
+          "content": `Purchase the gamepass linked below to continue with your order. Your gamepass has been sent to **${amount} ROBUX**.`
         },
         {
           "type": 1,
@@ -30,8 +74,8 @@ module.exports = {
             {
               "type": 2,
               "style": 5,
-              "label": "Link",
-              "url": "https://buymeacoffee.com/mistvle",
+              "label": "Purchase",
+              "url": `https://www.roblox.com/game-pass/${GAMEPASS_ID}`,
             }
           ]
         },
@@ -44,7 +88,7 @@ module.exports = {
           "items": [
             {
               "media": {
-                "url": "https://media.discordapp.net/attachments/1503464946401542196/1503465528725999626/image.png?ex=6a076763&is=6a0615e3&hm=33f7a0bf2186fe077b850ac2ba247decb076c2d84820805a283d7bff1762fe9c&=&format=webp&quality=lossless"
+                "url": "https://media.discordapp.net/attachments/1494233041051058217/1494929000814874674/31.png?ex=69e464a0&is=69e31320&hm=a42bdc3c2038ec30741b9d2318fdf85144874cc8ae1fd1701d06d018f66e0caf&=&format=webp&quality=lossless"
               }
             }
           ]
@@ -52,7 +96,6 @@ module.exports = {
       ]
     }
   ]
-})
+});
     }
-
-}
+};
