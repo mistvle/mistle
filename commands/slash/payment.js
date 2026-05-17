@@ -33,11 +33,11 @@ module.exports = {
 
             // 🔥 CHANGE GAMEPASS PRICE
             await noblox.configureGamePass(
-    Number(GAMEPASS_ID),
-    "Payment",
-    "Payment",
-    amount
-);
+                parseInt(GAMEPASS_ID),
+                "", // keep name
+                "", // keep description
+                amount
+            );
         } catch (err) {
             console.error(err);
 
